@@ -1,0 +1,135 @@
+[tool.poetry]
+name = "reelrecipes-api"
+version = "1.0.0"
+description = "ReelRecipes — FastAPI backend"
+authors = ["ReelRecipes Team"]
+readme = "README.md"
+packages = [{ include = "app" }]
+
+[tool.poetry.dependencies]
+python = "^3.12"
+
+# Web framework
+fastapi = "^0.115.0"
+uvicorn = { extras = ["standard"], version = "^0.30.0" }
+python-multipart = "^0.0.9"
+
+# MongoDB
+motor = "^3.5.0"
+beanie = "^1.26.0"
+
+# Validation & settings
+pydantic = "^2.8.0"
+pydantic-settings = "^2.4.0"
+
+# Auth — Clerk JWT verification
+python-jose = {version = ">=3.3.0", extras = ["cryptography"]}
+httpx = ">=0.27.0"
+
+# Job queue
+arq = "^0.26.0"
+redis = ">=5.0.0"
+
+# AI / LLM
+openai = ">=1.40.0"
+
+# Observability
+sentry-sdk = {version = ">=2.0.0", extras = ["fastapi"]}
+structlog = "^24.4.0"
+
+# Utilities
+python-ulid = "^2.7.0"
+svix = "^1.0.0"
+rapidfuzz = "^3.9.0"   # pantry ingredient fuzzy matching
+
+# Platform adapters
+yt-dlp = ">=2024.8.0"
+youtube-transcript-api = ">=0.6.2"
+mutagen = "^1.47.0"
+tiktoken = ">=0.7.0"
+posthog = ">=3.0.0"
+fpdf2 = "^2.7.0"           # recipe PDF export
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.3.0"
+pytest-asyncio = "^0.23.0"
+pytest-cov = "^5.0.0"
+httpx = "^0.27.0"
+anyio = { extras = ["trio"], version = "^4.4.0" }
+mongomock-motor = "^0.0.34"
+ruff = "^0.6.0"
+mypy = "^1.11.0"
+types-python-jose = "^3.3.0"
+respx = "^0.23.0"
+
+[tool.ruff]
+target-version = "py312"
+line-length = 100
+
+[tool.ruff.lint]
+select = [
+    "E", "W", "F", "I", "B", "C4", "UP", "ARG", "SIM", "TCH", "RUF",
+]
+ignore = [
+    "E501", "B008", "B904",
+    "RUF001", "RUF002", "RUF003",
+    "TCH001", "TCH002", "TCH003",
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**/*.py" = ["F811", "ARG001", "ARG002", "B017"]
+"app/adapters/*.py" = ["ARG002"]
+"app/services/extraction/prompt.py" = ["RUF001", "RUF002"]
+
+[tool.ruff.lint.isort]
+known-first-party = ["app"]
+
+[tool.mypy]
+python_version = "3.12"
+strict = true
+ignore_missing_imports = true
+plugins = ["pydantic.mypy"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_functions = ["test_*"]
+addopts = "-v --tb=short"
+
+[tool.coverage.run]
+source = ["app"]
+omit = [
+    "tests/*",
+    "app/workers/*",
+    # Platform adapters — require live platform APIs + yt-dlp binary; tested via integration
+    "app/adapters/youtube.py",
+    "app/adapters/tiktok.py",
+    "app/adapters/instagram.py",
+    "app/adapters/facebook.py",
+    "app/adapters/twitter.py",
+    "app/adapters/x.py",
+    "app/adapters/_ytdlp_mixin.py",
+    "app/adapters/_ytdlp_health.py",
+    # Auth — requires live Clerk JWKS endpoint
+    "app/auth/clerk.py",
+    "app/auth/authorization.py",
+    # Observability — requires live DSN / API keys
+    "app/config/sentry.py",
+    "app/config/analytics.py",
+    "app/config/logging.py",
+    # Whisper — requires ffmpeg binary and audio file
+    "app/services/extraction/whisper.py",
+]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "if TYPE_CHECKING:",
+    "raise NotImplementedError",
+]
+fail_under = 80
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

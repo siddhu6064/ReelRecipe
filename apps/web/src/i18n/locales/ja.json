@@ -1,0 +1,13 @@
+{
+  "nav": { "import": "+ インポート", "cookbook": "レシピ帳", "pantry": "パントリー", "discover": "発見", "planner": "計画", "profile": "プロフィール" },
+  "import": { "heading": "料理動画のURLを貼り付けてください。", "headingAccent": "完全なレシピを取得します。", "subheading": "60秒以内に食材、手順、栄養素を抽出します。", "placeholder": "https://youtube.com/watch?v=…", "button": "レシピを抽出", "extracting": "抽出中…", "platforms": "YouTube、TikTok、Instagram、Facebook、Xに対応" },
+  "cookbook": { "title": "レシピ帳", "importBtn": "+ レシピをインポート", "searchPlaceholder": "レシピを検索…", "allCuisines": "すべての料理", "allDifficulties": "すべての難易度", "starred": "お気に入り", "noRecipes": "まだレシピがありません。", "importFirst": "最初のレシピをインポート →" },
+  "recipe": { "servings": "人分", "ingredients": "材料", "instructions": "手順", "nutrition": "栄養素", "perServing": "1人分あたり", "watchVideo": "▶ 動画を見る", "startCooking": "調理開始", "editedBadge": "編集済み", "save": "保存", "reset": "リセット", "undo": "元に戻す", "askAI": "このレシピについてAIに聞く", "chatHint": "代替食材、調理技術、分量調整について質問できます。", "optional": "任意" },
+  "pantry": { "title": "パントリー", "subtitle": "持っているものを記録して、作れる料理を見つけましょう。", "addIngredient": "食材を追加", "ingredientName": "食材名", "qty": "量", "unit": "単位", "add": "追加", "empty": "パントリーが空です。", "emptyHint": "食材を追加して、作れる料理を発見しましょう。" },
+  "discover": { "title": "発見", "subtitle": "作れる料理を見つけるか、AIに新しいレシピを作ってもらいましょう。", "tabMatch": "何が作れる？", "tabAI": "AIのおすすめ", "tabExplore": "コミュニティ", "missing": "不足食材", "generateBtn": "提案を生成", "generating": "AIがレシピを生成中…", "noRecipes": "まだレシピがありません。動画をインポートしましょう！", "trendingTab": "トレンド", "newTab": "新着", "duplicate": "レシピ帳に保存", "duplicated": "保存しました！" },
+  "planner": { "title": "献立プランナー", "createBtn": "今週のプランを作成", "shoppingBtn": "買い物リスト", "hideShoppingBtn": "リストを非表示", "shoppingTitle": "買い物リスト", "allCovered": "必要な食材は揃っています！✓", "neededFor": "必要" },
+  "profile": { "title": "プロフィール", "editAccount": "アカウント編集", "dietary": "食事の好み", "dietaryHint": "AIのレシピ提案に使用されます。", "cuisine": "好きな料理", "cuisineHint": "提案で優先されます。", "units": "単位系", "metric": "メートル法 (g, ml, °C)", "imperial": "ヤード・ポンド法 (oz, カップ, °F)", "language": "言語", "save": "設定を保存", "saving": "保存中…", "saved": "保存済み", "signOut": "サインアウト", "signOutConfirm": "サインアウトしますか？" },
+  "collections": { "title": "コレクション", "newCollection": "新しいコレクション", "namePlaceholder": "コレクション名", "create": "作成", "empty": "まだコレクションがありません。", "emptyHint": "レシピをフォルダで整理しましょう。", "addToCollection": "コレクションに追加", "removeFromCollection": "コレクションから削除" },
+  "errors": { "somethingWrong": "問題が発生しました。もう一度お試しください。", "notFound": "見つかりません。", "tryAgain": "再試行" },
+  "common": { "loading": "読み込み中…", "cancel": "キャンセル", "delete": "削除", "confirm": "確認", "close": "閉じる", "back": "戻る", "search": "検索", "filter": "フィルター", "minutes": "分", "hours": "時間", "servings_one": "{{count}}人分", "servings_other": "{{count}}人分" }
+}

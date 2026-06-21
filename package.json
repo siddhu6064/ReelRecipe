@@ -1,0 +1,23 @@
+{
+  "name": "reelrecipes",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev:api": "cd apps/api && poetry run uvicorn app.main:app --reload --port 8000",
+    "dev:worker": "cd apps/api && poetry run arq app.workers.job_worker.WorkerSettings",
+    "dev:web": "cd apps/web && pnpm dev",
+    "dev:mobile": "cd apps/mobile && pnpm expo start",
+    "test:api": "cd apps/api && poetry run pytest tests/ -q --tb=short --cov=app",
+    "test:web": "cd apps/web && pnpm test",
+    "lint": "eslint . && cd apps/api && poetry run ruff check app/",
+    "format": "prettier --write . && cd apps/api && poetry run ruff format app/",
+    "typecheck": "tsc --noEmit -p tsconfig.json && cd apps/web && pnpm tsc --noEmit && cd ../mobile && pnpm tsc --noEmit"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^8.0.0",
+    "@typescript-eslint/parser": "^8.0.0",
+    "eslint": "^9.0.0",
+    "prettier": "^3.3.0",
+    "typescript": "^5.5.0"
+  }
+}

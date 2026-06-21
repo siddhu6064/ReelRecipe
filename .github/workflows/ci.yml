@@ -1,0 +1,179 @@
+name: CI
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  # ── Python backend ──────────────────────────────────────────────────────
+  lint-python:
+    name: Lint Python (ruff)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.12' }
+      - name: Install ruff
+        run: pip install ruff
+      - name: Lint
+        run: ruff check apps/api/app --select E,F,W,I --ignore E501
+        
+  test-api:
+    name: Test API (pytest)
+    runs-on: ubuntu-latest
+    services:
+      mongodb:
+        image: mongo:7
+        ports: ['27017:27017']
+      redis:
+        image: redis:7-alpine
+        ports: ['6379:6379']
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.12' }
+      - name: Install Poetry
+        run: pip install poetry
+      - name: Cache Poetry venv
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pypoetry
+          key: poetry-${{ runner.os }}-${{ hashFiles('apps/api/pyproject.toml') }}
+      - name: Install dependencies
+        run: cd apps/api && poetry install --no-root
+      - name: Run tests with coverage
+        run: |
+          cd apps/api
+          poetry run pytest tests/ -q \
+            --cov=app \
+            --cov-report=xml \
+            --cov-fail-under=80 \
+            --tb=short
+        env:
+          ENV: test
+          MONGODB_URL: mongodb://localhost:27017
+          MONGODB_DB: reelrecipes_ci
+          REDIS_URL: redis://localhost:6379
+          CLERK_SECRET_KEY: sk_test_dummy
+          OPENAI_API_KEY: sk-test-fake
+          NUTRITIONIX_APP_ID: test
+          NUTRITIONIX_API_KEY: test
+          YOUTUBE_API_KEY: fake
+      - name: Upload coverage
+        uses: codecov/codecov-action@v4
+        if: success()
+        with:
+          file: apps/api/coverage.xml
+          fail_ci_if_error: false
+
+  # ── TypeScript ──────────────────────────────────────────────────────────
+  lint-ts:
+    name: Lint TypeScript (ESLint)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with: { version: 9 }
+      - uses: actions/setup-node@v4
+        with: { node-version: '20', cache: 'pnpm' }
+      - run: pnpm install --no-frozen-lockfile
+      - run: pnpm eslint apps/web/src --ext .ts,.tsx --max-warnings 0
+        continue-on-error: true   # warn, don't block
+        
+  typecheck-web:
+    name: Typecheck Web
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with: { version: 9 }
+      - uses: actions/setup-node@v4
+        with: { node-version: '20', cache: 'pnpm' }
+      - run: pnpm install --no-frozen-lockfile
+      - run: cd apps/web && pnpm tsc --noEmit
+
+  typecheck-mobile:
+    name: Typecheck Mobile
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with: { version: 9 }
+      - uses: actions/setup-node@v4
+        with: { node-version: '20', cache: 'pnpm' }
+      - run: pnpm install --no-frozen-lockfile
+      - run: cd apps/mobile && pnpm tsc --noEmit
+        continue-on-error: true   # native types not fully resolved without EAS build
+
+  build-web:
+    name: Build Web
+    runs-on: ubuntu-latest
+    needs: [lint-ts, typecheck-web]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with: { version: 9 }
+      - uses: actions/setup-node@v4
+        with: { node-version: '20', cache: 'pnpm' }
+      - run: pnpm install --no-frozen-lockfile
+      - run: cd apps/web && pnpm build
+        env:
+          VITE_API_URL: https://reelrecipes-api.railway.app
+          VITE_CLERK_PUBLISHABLE_KEY: pk_test_placeholder
+
+  # ── Shared types ────────────────────────────────────────────────────────
+  test-shared:
+    name: Build Shared Types
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with: { version: 9 }
+      - uses: actions/setup-node@v4
+        with: { node-version: '20', cache: 'pnpm' }
+      - run: pnpm install --no-frozen-lockfile
+      - run: cd packages/shared && pnpm tsc --noEmit
+        continue-on-error: true
+
+  # ── Format check ────────────────────────────────────────────────────────
+  format:
+    name: Format (Prettier)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with: { version: 9 }
+      - uses: actions/setup-node@v4
+        with: { node-version: '20', cache: 'pnpm' }
+      - run: pnpm install --no-frozen-lockfile
+      - run: pnpm prettier --check "apps/web/src/**/*.{ts,tsx}" "packages/shared/**/*.ts"
+        continue-on-error: true
+
+  # ── CI gate (required for branch protection) ────────────────────────────
+  ci:
+    name: CI ✅
+    runs-on: ubuntu-latest
+    needs: [lint-python, test-api, typecheck-web, build-web, test-shared]
+    if: always()
+    steps:
+      - name: Check all jobs
+        run: |
+          if [[ "${{ needs.lint-python.result }}" != "success" ]]; then
+            echo "lint-python failed" && exit 1
+          fi
+          if [[ "${{ needs.test-api.result }}" != "success" ]]; then
+            echo "test-api failed" && exit 1
+          fi
+          if [[ "${{ needs.typecheck-web.result }}" != "success" ]]; then
+            echo "typecheck-web failed" && exit 1
+          fi
+          if [[ "${{ needs.build-web.result }}" != "success" ]]; then
+            echo "build-web failed" && exit 1
+          fi
+          echo "All required checks passed ✅"

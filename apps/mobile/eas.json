@@ -1,0 +1,59 @@
+{
+  "cli": {
+    "version": ">= 12.0.0",
+    "requireCommit": true
+  },
+  "build": {
+    "development": {
+      "developmentClient": true,
+      "distribution": "internal",
+      "env": {
+        "EXPO_PUBLIC_API_URL": "http://localhost:8000",
+        "EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY": "pk_test_REPLACE_WITH_YOUR_TEST_KEY"
+      }
+    },
+    "preview": {
+      "distribution": "internal",
+      "channel": "preview",
+      "ios": {
+        "simulator": false,
+        "enterpriseProvisioning": "adhoc"
+      },
+      "android": {
+        "buildType": "apk"
+      },
+      "env": {
+        "EXPO_PUBLIC_API_URL": "https://reelrecipes-api.railway.app",
+        "EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY": "pk_live_REPLACE_WITH_YOUR_LIVE_KEY"
+      }
+    },
+    "production": {
+      "channel": "production",
+      "ios": {
+        "simulator": false
+      },
+      "android": {
+        "buildType": "app-bundle"
+      },
+      "env": {
+        "EXPO_PUBLIC_API_URL": "https://reelrecipes-api.railway.app",
+        "EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY": "pk_live_REPLACE_WITH_YOUR_LIVE_KEY"
+      }
+    }
+  },
+  "submit": {
+    "production": {
+      "ios": {
+        "_comment": "Get these from Apple Developer Portal — https://developer.apple.com",
+        "appleId": "REPLACE_WITH_YOUR_APPLE_ID_EMAIL",
+        "ascAppId": "REPLACE_WITH_APP_STORE_CONNECT_APP_ID",
+        "appleTeamId": "REPLACE_WITH_10_CHAR_TEAM_ID"
+      },
+      "android": {
+        "_comment": "Download service account JSON from Google Play Console API access",
+        "serviceAccountKeyPath": "./google-play-service-account.json",
+        "track": "internal"
+      }
+    }
+  }
+}

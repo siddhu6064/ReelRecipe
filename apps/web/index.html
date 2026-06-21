@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ReelRoutes — Turn travel videos into trip plans</title>
+    <meta
+      name="description"
+      content="Paste any travel video URL. ReelRoutes extracts every location and builds an interactive trip map in seconds."
+    />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="ReelRoutes" />
+    <meta property="og:title" content="ReelRoutes — Turn travel videos into trip plans" />
+    <meta
+      property="og:description"
+      content="Paste any YouTube, TikTok, or Instagram travel video. AI extracts every location and drops them on an interactive map — ready to navigate."
+    />
+    <meta property="og:image" content="https://reelroutes.app/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:url" content="https://reelroutes.app" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@reelroutes" />
+    <meta name="twitter:title" content="ReelRoutes — Turn travel videos into trip plans" />
+    <meta
+      name="twitter:description"
+      content="Paste any YouTube, TikTok, or Instagram travel video. AI extracts every location and drops them on an interactive map."
+    />
+    <meta name="twitter:image" content="https://reelroutes.app/og-image.png" />
+
+    <!-- Theme colour (matches coral brand) -->
+    <meta name="theme-color" content="#D85A30" />
+
+    <!-- Icons -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Google Maps (Plan from Scratch feature) -->
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=%VITE_GOOGLE_MAPS_API_KEY%&libraries=places"
+      async
+      defer
+    ></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

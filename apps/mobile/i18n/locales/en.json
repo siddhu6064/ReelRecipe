@@ -1,0 +1,126 @@
+{
+  "nav": {
+    "import": "+ Import",
+    "cookbook": "Cookbook",
+    "pantry": "Pantry",
+    "discover": "Discover",
+    "planner": "Plan",
+    "profile": "Profile"
+  },
+  "import": {
+    "heading": "Paste a cooking video.",
+    "headingAccent": "Get a full recipe.",
+    "subheading": "Extracts ingredients, steps and nutrition in under 60 seconds.",
+    "placeholder": "https://youtube.com/watch?v=…",
+    "button": "Extract Recipe",
+    "extracting": "Extracting…",
+    "platforms": "Works with YouTube, TikTok, Instagram, Facebook & X"
+  },
+  "cookbook": {
+    "title": "Cookbook",
+    "importBtn": "+ Import Recipe",
+    "searchPlaceholder": "Search recipes…",
+    "allCuisines": "All cuisines",
+    "allDifficulties": "All difficulties",
+    "starred": "Starred",
+    "noRecipes": "No recipes yet.",
+    "importFirst": "Import your first recipe →"
+  },
+  "recipe": {
+    "servings": "Servings",
+    "ingredients": "Ingredients",
+    "instructions": "Instructions",
+    "nutrition": "Nutrition",
+    "perServing": "per serving",
+    "watchVideo": "▶ Watch",
+    "startCooking": "Start Cooking",
+    "editedBadge": "Edited from original",
+    "save": "Save",
+    "reset": "Reset",
+    "undo": "Undo",
+    "askAI": "Ask AI about this recipe",
+    "chatHint": "Ask about substitutions, techniques, or scaling tips.",
+    "optional": "optional"
+  },
+  "pantry": {
+    "title": "Pantry",
+    "subtitle": "Track what you have. We'll tell you what you can cook.",
+    "addIngredient": "Add ingredient",
+    "ingredientName": "Ingredient name",
+    "qty": "Qty",
+    "unit": "Unit",
+    "add": "Add",
+    "empty": "Your pantry is empty.",
+    "emptyHint": "Add ingredients to discover what you can cook."
+  },
+  "discover": {
+    "title": "Discover",
+    "subtitle": "See what you can cook — or let AI invent something new.",
+    "tabMatch": "What can I cook?",
+    "tabAI": "AI suggestions",
+    "tabExplore": "Community",
+    "missing": "Missing",
+    "generateBtn": "Generate suggestions",
+    "generating": "Generating recipes with AI…",
+    "noRecipes": "No recipes yet. Import some videos!",
+    "trendingTab": "Trending",
+    "newTab": "New",
+    "duplicate": "Save to cookbook",
+    "duplicated": "Saved!"
+  },
+  "planner": {
+    "title": "Meal Planner",
+    "createBtn": "Create this week's plan",
+    "shoppingBtn": "Shopping list",
+    "hideShoppingBtn": "Hide shopping list",
+    "shoppingTitle": "Shopping list",
+    "allCovered": "You have everything you need! ✓",
+    "neededFor": "for"
+  },
+  "profile": {
+    "title": "Profile",
+    "editAccount": "Edit account",
+    "dietary": "Dietary preferences",
+    "dietaryHint": "Used to personalise AI recipe suggestions.",
+    "cuisine": "Favourite cuisines",
+    "cuisineHint": "We'll prioritise these in suggestions.",
+    "units": "Unit system",
+    "metric": "Metric (g, ml, °C)",
+    "imperial": "Imperial (oz, cups, °F)",
+    "language": "Language",
+    "save": "Save preferences",
+    "saving": "Saving…",
+    "saved": "Saved",
+    "signOut": "Sign out",
+    "signOutConfirm": "Are you sure you want to sign out?"
+  },
+  "collections": {
+    "title": "Collections",
+    "newCollection": "New collection",
+    "namePlaceholder": "Collection name",
+    "create": "Create",
+    "empty": "No collections yet.",
+    "emptyHint": "Organise your recipes into folders.",
+    "addToCollection": "Add to collection",
+    "removeFromCollection": "Remove from collection"
+  },
+  "errors": {
+    "somethingWrong": "Something went wrong. Please try again.",
+    "notFound": "Not found.",
+    "tryAgain": "Try again"
+  },
+  "common": {
+    "loading": "Loading…",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "confirm": "Confirm",
+    "close": "Close",
+    "back": "Back",
+    "search": "Search",
+    "filter": "Filter",
+    "minutes": "min",
+    "hours": "h",
+    "servings_one": "{{count}} serving",
+    "servings_other": "{{count}} servings"
+  }
+}

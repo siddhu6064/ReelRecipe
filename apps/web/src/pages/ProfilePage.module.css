@@ -1,0 +1,32 @@
+.page { max-width: 700px; margin: 0 auto; padding: 2rem 1.5rem 4rem; color: #f5f5f5; }
+.loading { text-align: center; padding: 4rem; color: #888; }
+.accountCard { display: flex; align-items: center; gap: 1rem; background: #1a1a1a; border: 1px solid #2a2a2a; border-radius: 16px; padding: 1.25rem; margin-bottom: 2rem; }
+.avatar { width: 56px; height: 56px; border-radius: 50%; object-fit: cover; flex-shrink: 0; }
+.avatarPlaceholder { width: 56px; height: 56px; border-radius: 50%; background: #ff6b35; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; font-weight: 700; color: #fff; flex-shrink: 0; }
+.accountInfo { flex: 1; min-width: 0; }
+.accountName { font-size: 1rem; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.accountEmail { font-size: .85rem; color: #888; margin-top: .2rem; }
+.editAccountBtn { background: #2a2a2a; border: 1px solid #333; color: #aaa; padding: .5rem 1rem; border-radius: 8px; cursor: pointer; font-size: .85rem; white-space: nowrap; flex-shrink: 0; }
+.editAccountBtn:hover { background: #333; }
+.section { margin-bottom: 2rem; }
+.sectionTitle { font-size: 1rem; font-weight: 600; margin-bottom: .25rem; }
+.sectionSub { font-size: .85rem; color: #666; margin-bottom: .85rem; }
+.chipGrid { display: flex; flex-wrap: wrap; gap: .5rem; }
+.chip { background: #1a1a1a; border: 1.5px solid #2a2a2a; color: #888; padding: .4rem .9rem; border-radius: 20px; font-size: .85rem; cursor: pointer; transition: all .15s; }
+.chip:hover { border-color: #555; color: #ddd; }
+.chipActive { background: #2a1a0a; border-color: #ff6b35; color: #ff6b35; }
+.unitRow { display: flex; flex-direction: column; gap: .5rem; }
+.unitBtn { display: flex; align-items: center; gap: .75rem; background: #1a1a1a; border: 1.5px solid #2a2a2a; color: #888; padding: .85rem 1.1rem; border-radius: 12px; cursor: pointer; text-align: left; transition: all .15s; width: 100%; }
+.unitBtn:hover { border-color: #555; }
+.unitBtnActive { border-color: #ff6b35; background: #2a1a0a; color: #f5f5f5; }
+.unitIcon { font-size: 1.2rem; flex-shrink: 0; }
+.unitLabel { font-size: .9rem; }
+.saveRow { display: flex; align-items: center; gap: 1rem; margin-bottom: 2.5rem; }
+.saveBtn { padding: .8rem 2rem; background: #ff6b35; border: none; border-radius: 12px; color: #fff; font-size: .95rem; font-weight: 600; cursor: pointer; transition: background .15s; }
+.saveBtn:hover:not(:disabled) { background: #e85a24; }
+.saveBtn:disabled { opacity: .6; cursor: not-allowed; }
+.saveBtnDone { background: #2d6b3a; }
+.saveError { font-size: .85rem; color: #ff5555; }
+.dangerSection { border-top: 1px solid #1a1a1a; padding-top: 1.5rem; }
+.signOutBtn { background: none; border: 1.5px solid #333; color: #666; padding: .65rem 1.25rem; border-radius: 10px; cursor: pointer; font-size: .9rem; }
+.signOutBtn:hover { border-color: #ff5555; color: #ff5555; }

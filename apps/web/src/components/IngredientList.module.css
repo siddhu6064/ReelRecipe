@@ -1,0 +1,14 @@
+.list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0; }
+.row { display: flex; align-items: center; gap: 8px; padding: 7px 0; border-bottom: 1px solid #111; font-size: .9rem; }
+.row:last-child { border-bottom: none; }
+.optional { opacity: .65; }
+.arrows { display: flex; flex-direction: column; gap: 2px; flex-shrink: 0; }
+.arrowBtn { background: none; border: 1px solid #2a2a2a; border-radius: 3px; color: #555; width: 18px; height: 18px; font-size: .65rem; cursor: pointer; display: flex; align-items: center; justify-content: center; padding: 0; }
+.arrowBtn:hover:not(:disabled) { border-color: #ff6b35; color: #ff6b35; }
+.arrowBtn:disabled { opacity: .2; cursor: not-allowed; }
+.qty { font-family: 'DM Mono', 'Courier New', monospace; font-size: .8rem; color: #e8a84a; min-width: 72px; flex-shrink: 0; }
+.name { flex: 1; color: #ddd; line-height: 1.4; }
+.prep { color: #888; }
+.optBadge { font-size: .7rem; color: #666; font-style: italic; }
+.subBtn { background: none; border: 1px solid #2a2a2a; border-radius: 4px; color: #555; padding: 2px 7px; font-size: .8rem; cursor: pointer; flex-shrink: 0; }
+.subBtn:hover { border-color: #6b8aff; color: #6b8aff; }

@@ -1,0 +1,33 @@
+{
+  "name": "@reelrecipes/web",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@clerk/clerk-react": "^5.0.0",
+    "@tanstack/react-query": "^5.0.0",
+    "@tanstack/react-query-devtools": "^5.0.0",
+    "react": "^18.3.0",
+    "react-dom": "^18.3.0",
+    "react-router-dom": "^6.26.0",
+    "zustand": "^4.5.0",
+    "@reelrecipes/shared": "workspace:*",
+    "i18next": "^23.11.0",
+    "react-i18next": "^14.1.0",
+    "i18next-browser-languagedetector": "^8.0.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.0",
+    "@types/react-dom": "^18.3.0",
+    "@vitejs/plugin-react": "^4.3.0",
+    "typescript": "^5.5.0",
+    "vite": "^5.4.0",
+    "vitest": "^2.0.0"
+  }
+}

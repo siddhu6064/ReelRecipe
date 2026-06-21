@@ -1,0 +1,37 @@
+<!--
+  Add these intent filters to AndroidManifest.xml inside the <activity> tag.
+  EAS Build auto-generates this from app.json intentFilters, but
+  this file is kept as a reference for manual native builds.
+-->
+
+<!-- Handle sharing from YouTube, TikTok, Instagram, etc. -->
+<intent-filter>
+  <action android:name="android.intent.action.SEND" />
+  <category android:name="android.intent.category.DEFAULT" />
+  <data android:mimeType="text/plain" />
+</intent-filter>
+
+<!-- Handle video file shares -->
+<intent-filter>
+  <action android:name="android.intent.action.SEND" />
+  <category android:name="android.intent.category.DEFAULT" />
+  <data android:mimeType="video/*" />
+</intent-filter>
+
+<!-- Universal links: https://reelrecipes.app/* -->
+<intent-filter android:autoVerify="true">
+  <action android:name="android.intent.action.VIEW" />
+  <category android:name="android.intent.category.DEFAULT" />
+  <category android:name="android.intent.category.BROWSABLE" />
+  <data
+    android:scheme="https"
+    android:host="reelrecipes.app" />
+</intent-filter>
+
+<!-- Custom scheme: reelrecipes:// deep links -->
+<intent-filter>
+  <action android:name="android.intent.action.VIEW" />
+  <category android:name="android.intent.category.DEFAULT" />
+  <category android:name="android.intent.category.BROWSABLE" />
+  <data android:scheme="reelrecipes" />
+</intent-filter>

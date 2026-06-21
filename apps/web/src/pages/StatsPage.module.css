@@ -1,0 +1,26 @@
+.page { max-width: 600px; margin: 0 auto; padding: 2rem 1.5rem; }
+.loading { text-align: center; color: #888; padding: 4rem; }
+.card { background: linear-gradient(135deg, #1a1a1a 0%, #0f1a0f 100%); border: 1px solid #2a2a2a; border-radius: 20px; overflow: hidden; }
+.header { background: linear-gradient(135deg, #ff6b35 0%, #e8502a 100%); padding: 2rem 1.5rem; text-align: center; }
+.headerEmoji { font-size: 3rem; display: block; margin-bottom: .5rem; }
+.heading { font-size: 1.8rem; font-weight: 800; color: #fff; margin-bottom: .4rem; }
+.subheading { font-size: .9rem; color: rgba(255,255,255,.8); }
+.bigRow { display: flex; padding: 1.5rem; gap: 1rem; }
+.statBlock { flex: 1; background: #111; border-radius: 14px; padding: 1.25rem .75rem; text-align: center; }
+.statBlockAccent { background: #2a1a0a; border: 1.5px solid #ff6b35; }
+.statEmoji { font-size: 1.6rem; margin-bottom: .4rem; }
+.statValue { font-size: 2rem; font-weight: 800; color: #888; line-height: 1; }
+.statValueAccent { color: #ff6b35; }
+.statLabel { font-size: .75rem; color: #666; margin-top: .3rem; }
+.divider { height: 1px; background: #1a1a1a; margin: 0 1.5rem; }
+.detailGrid { display: grid; grid-template-columns: 1fr 1fr; gap: .75rem; padding: 1.5rem; }
+.detailCard { background: #111; border-radius: 12px; padding: 1rem; display: flex; align-items: center; gap: .75rem; }
+.detailEmoji { font-size: 1.4rem; }
+.detailValue { font-size: 1rem; font-weight: 700; color: #f5f5f5; }
+.detailLabel { font-size: .75rem; color: #666; margin-top: .1rem; }
+.tagsSection { padding: 0 1.5rem 1rem; }
+.tagsLabel { font-size: .75rem; font-weight: 600; color: #666; text-transform: uppercase; letter-spacing: .08em; margin-bottom: .6rem; }
+.tags { display: flex; flex-wrap: wrap; gap: .4rem; }
+.tag { background: #1a1a1a; color: #aaa; padding: .35rem .85rem; border-radius: 20px; font-size: .8rem; }
+.tagAccent { background: #1a2a1a; color: #6dbf85; }
+.footer { padding: 1rem 1.5rem; text-align: right; font-size: .75rem; color: #444; border-top: 1px solid #1a1a1a; }

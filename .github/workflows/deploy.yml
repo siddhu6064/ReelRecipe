@@ -1,0 +1,111 @@
+name: Deploy
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:      # Allow manual trigger from GitHub UI
+
+concurrency:
+  group: deploy-production
+  cancel-in-progress: false   # Never cancel a running deploy
+
+jobs:
+  # ── Guard: run CI first, only deploy if green ──────────────────────────
+  ci:
+    name: CI gate
+    uses: ./.github/workflows/ci.yml
+
+  # ── Deploy API to Railway ──────────────────────────────────────────────
+  deploy-api:
+    name: Deploy API → Railway
+    needs: ci
+    runs-on: ubuntu-latest
+    environment: production
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Railway CLI
+        run: npm install -g @railway/cli
+
+      - name: Deploy API service
+        run: railway deploy --service reelrecipes-api
+        env:
+          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
+
+      - name: Deploy ARQ worker service
+        run: railway deploy --service reelrecipes-worker
+        env:
+          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
+
+      - name: Wait for Railway deployment
+        run: sleep 30
+
+      - name: Health check
+        run: |
+          STATUS=$(curl -s -o /dev/null -w "%{http_code}" \
+            ${{ vars.API_URL }}/health)
+          if [ "$STATUS" != "200" ]; then
+            echo "Health check failed with status $STATUS"
+            exit 1
+          fi
+          echo "Health check passed ✓"
+
+  # ── Deploy web to Vercel ───────────────────────────────────────────────
+  deploy-web:
+    name: Deploy Web → Vercel
+    needs: ci
+    runs-on: ubuntu-latest
+    environment: production
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install --no-frozen-lockfile
+
+      - name: Build web app
+        run: cd apps/web && pnpm build
+        env:
+          VITE_API_URL: ${{ vars.API_URL }}
+          VITE_CLERK_PUBLISHABLE_KEY: ${{ secrets.VITE_CLERK_PUBLISHABLE_KEY }}
+
+      - name: Deploy to Vercel
+        uses: amondnet/vercel-action@v25
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
+          working-directory: apps/web
+          vercel-args: '--prod'
+
+  # ── Smoke test against production ────────────────────────────────────
+  smoke-test:
+    name: Smoke test production
+    needs: [deploy-api, deploy-web]
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install httpx
+        run: pip install httpx pytest
+
+      - name: Run smoke tests
+        run: pytest scripts/smoke_test.py -v
+        env:
+          API_URL: ${{ vars.API_URL }}
+          SMOKE_TEST_TOKEN: ${{ secrets.SMOKE_TEST_TOKEN }}

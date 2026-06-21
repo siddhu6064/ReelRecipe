@@ -1,0 +1,73 @@
+/* ReelRoutes V4 — Global Styles */
+
+:root {
+  /* Brand */
+  --coral: #D85A30;
+  --coral-light: #FAECE7;
+  --coral-dark: #a8401e;
+
+  /* Surface */
+  --bg: #0f0f0e;
+  --surface: #181816;
+  --surface-2: #222220;
+  --surface-3: #2c2c29;
+  --border: #2e2e2b;
+  --border-light: #3a3a37;
+
+  /* Text */
+  --text: #f0efe9;
+  --text-muted: #9e9c94;
+  --text-faint: #5a5955;
+
+  /* Semantic */
+  --green: #3ecf6e;
+  --yellow: #f0b429;
+  --red: #f07070;
+  --blue: #5ba8f5;
+
+  /* Radius */
+  --r-sm: 6px;
+  --r-md: 10px;
+  --r-lg: 16px;
+  --r-xl: 24px;
+  --r-full: 9999px;
+
+  /* Shadow */
+  --shadow-sm: 0 1px 4px rgba(0,0,0,.4);
+  --shadow-md: 0 4px 16px rgba(0,0,0,.5);
+  --shadow-lg: 0 8px 32px rgba(0,0,0,.6);
+
+  /* Font */
+  --font-display: 'Syne', system-ui, sans-serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; height: 100%; }
+
+body {
+  font-family: var(--font-body);
+  background: var(--bg);
+  color: var(--text);
+  font-size: 14px;
+  line-height: 1.6;
+  min-height: 100%;
+  -webkit-font-smoothing: antialiased;
+}
+
+#root { min-height: 100vh; display: flex; flex-direction: column; }
+
+a { color: inherit; text-decoration: none; }
+button { cursor: pointer; font-family: inherit; border: none; background: none; }
+input, textarea { font-family: inherit; }
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border-light); border-radius: var(--r-full); }
+
+/* Focus ring */
+:focus-visible { outline: 2px solid var(--coral); outline-offset: 2px; border-radius: 2px; }
+
+/* Utilities */
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
